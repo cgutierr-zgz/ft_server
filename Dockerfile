@@ -6,7 +6,7 @@
 #    By: cgutierr <cgutierr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/13 18:40:38 by cgutierr          #+#    #+#              #
-#    Updated: 2021/04/28 21:58:31 by cgutierr         ###   ########.fr        #
+#    Updated: 2021/05/05 15:34:36 by cgutierr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,19 +57,36 @@ RUN		apt-get install --no-install-recommends openssl
 
 # Generamos nuestro certificado SSL y se exporta a la ubicación indicada en el
 #	archivo de configuración de NGINX
-RUN openssl req -x509 -nodes -days 365 -subj "/C=ES/ST=Madird/L=Madrid/O=42/OU=42Madrid/CN=cgutierr" -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
-
-#RUN		sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt;
-#openssl: es la herramienta de línea de comandos básica para crear y administrar certificados, claves, y otros archivos de OpenSSL.
-#req: este subcomando especifica que deseamos usar la administración de la solicitud de firma de certificados (CSR) X.509. El “X.509” es un estándar de infraestructura de claves públicas al que se adecuan SSL y TLS para la administración de claves y certificados a través de él. Queremos crear un nuevo certificado X.509, por lo que usaremos este subcomando.
-#-x509: modifica aún más el subcomando anterior al indicar a la utilidad que deseamos crear un certificado autofirmado en lugar de generar una solicitud de firma de certificados, como normalmente sucede.
-#-nodes: indica a OpenSSL que omita la opción para proteger nuestro certificado con una frase de contraseña. Necesitamos que Apache pueda leer el archivo, sin intervención del usuario, cuando se inicie el servidor. Una frase de contraseña evitaría que esto suceda porque tendríamos que ingresarla tras cada reinicio.
-#-days 365: esta opción establece el tiempo durante el cual el certificado se considerará válido. En este caso, lo configuramos por un año.
-#-newkey rsa:2048: especifica que deseamos generar un nuevo certificado y una nueva clave al mismo tiempo. No creamos la clave que se requiere para firmar el certificado en un paso anterior, por lo que debemos crearla junto con el certificado. La parte rsa:2048 le indica que cree una clave RSA de 2048 bits de extensión.
-#-keyout: esta línea indica a OpenSSL dónde colocar el archivo de clave privada generado que estamos creando.
-#-out: indica a OpenSSL dónde colocar el certificado que creamos
-#https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-18-04-es
-
+RUN		openssl req -x509 -nodes -days 365 \
+		-subj "/C=ES/ST=Madird/L=Madrid/O=42/OU=42Madrid/CN=cgutierr" \
+		-newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key \
+		-out /etc/ssl/certs/nginx-selfsigned.crt
+# openssl:			Es la herramienta de línea de comandos básica para crear y
+#	administrar certificados, claves, y otros archivos de OpenSSL.
+# req:				Este subcomando especifica que deseamos usar la
+#	administración de la solicitud de firma de certificados (CSR) X.509. El
+#	“X.509” es un estándar de infraestructura de claves públicas al que se 
+#	adecuan SSL y TLS para la administración de claves y certificados a través
+#	de él. Queremos crear un nuevo certificado X.509, por lo que usaremos este
+#	subcomando.
+# -x509:			Modifica aún más el subcomando anterior al indicar a la
+#	utilidad que deseamos crear un certificado autofirmado en lugar de generar
+#	una solicitud de firma de certificados, como normalmente sucede.
+# -nodes:			Indica a OpenSSL que omita la opción para proteger nuestro
+#	certificado con una frase de contraseña. Necesitamos que Apache pueda leer
+#	el archivo, sin intervención del usuario, cuando se inicie el servidor.
+#	Una frase de contraseña evitaría que esto suceda porque tendríamos que
+#	ingresarla tras cada reinicio.
+# -days 365:		Esta opción establece el tiempo durante el cual el
+#	certificado se considerará válido. En este caso, lo configuramos por un año.
+# -newkey rsa:2048:	Especifica que deseamos generar un nuevo certificado y una
+#	nueva clave al mismo tiempo. No creamos la clave que se requiere para firmar
+#	el certificado en un paso anterior, por lo que debemos crearla junto con el
+#	certificado. La parte rsa:2048 le indica que cree una clave RSA de 2048 bits
+#	de extensión.
+# -keyout:			Esta línea indica a OpenSSL dónde colocar el archivo de
+#	clave privada generado que estamos creando.
+# -out:				Indica a OpenSSL dónde colocar el certificado que creamos
 
 # Instalamos MySQL-MariaDB
 RUN		apt-get install -y --no-install-recommends mariadb-server
