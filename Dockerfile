@@ -6,7 +6,7 @@
 #    By: cgutierr <cgutierr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/13 18:40:38 by cgutierr          #+#    #+#              #
-#    Updated: 2021/05/05 16:56:52 by cgutierr         ###   ########.fr        #
+#    Updated: 2021/05/05 17:12:13 by cgutierr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ RUN		apt-get install --no-install-recommends openssl
 
 # Generamos nuestro certificado SSL y se exporta a la ubicación indicada en el
 #	archivo de configuración de NGINX
+#	Archivo: default
 RUN		openssl req -x509 -nodes -days 365 \
 		-subj "/C=ES/ST=Madird/L=Madrid/O=42/OU=42Madrid/CN=cgutierr" \
 		-newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key \
@@ -88,7 +89,7 @@ RUN		openssl req -x509 -nodes -days 365 \
 # -out:				Indica a OpenSSL dónde colocar el certificado que creamos
 
 # Instalamos PHP
-RUN apt-get install -y --no-install-recommends php php-fpm php-mysql		
+RUN		apt-get install -y --no-install-recommends php-fpm php-mysql		
 
 # Instalamos MySQL-MariaDB
 RUN		apt-get install -y --no-install-recommends mariadb-server
