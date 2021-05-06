@@ -6,7 +6,7 @@
 #    By: cgutierr <cgutierr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/13 18:40:38 by cgutierr          #+#    #+#              #
-#    Updated: 2021/05/05 17:12:13 by cgutierr         ###   ########.fr        #
+#    Updated: 2021/05/06 18:58:52 by cgutierr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ RUN		apt-get install -y --no-install-recommends nginx
 
 # Copiamos nuestra configuración de NGINX a la carpeta por defecto de NGINX
 #	Archivo: default
-COPY	./srcs/default /etc/nginx/sites-available/
+COPY	./srcs/default /etc/nginx/
+#/sites-available/ ?FIXME:
 
 # Instalamos OpenSSL
 RUN		apt-get install --no-install-recommends openssl
@@ -115,3 +116,6 @@ CMD		bash server.sh
 
 # Exponemos el puerto 80 de nuestra imagen contenedor
 EXPOSE	80
+
+# Exponemos el puerto 443 para el SSL
+EXPOSE	443
