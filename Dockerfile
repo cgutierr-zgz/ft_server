@@ -14,10 +14,10 @@
 # Tendrá que funcionar sobre Debian Buster
 # Servicios:
 #	· Wordpress (Lo tendrá que instalar Ud. mismo)
-#	· Phpmyadmin
+#	· PhpMyAdmin
 #	· MySQL
 #
-# La base de datos SQL debe funcionar con Wordpress y Phpmyadmin
+# La base de datos SQL debe funcionar con Wordpress y PhpMyAdmin
 #
 # Cuando sea posible se debe poder usar el protocolo SSL
 #

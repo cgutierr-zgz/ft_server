@@ -12,9 +12,9 @@ server {
 	#autoindex_format html;
 
 	# Configuramos SSL, su certificado, clave y ubicación
-	ssl on;
-	ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
-	ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+	#ssl on;
+	#ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+	#ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
 
 	# Definimos la carpeta raíz del servidor
 	root /var/www/html;
