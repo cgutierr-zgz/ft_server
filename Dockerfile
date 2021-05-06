@@ -6,7 +6,7 @@
 #    By: cgutierr <cgutierr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/13 18:40:38 by cgutierr          #+#    #+#              #
-#    Updated: 2021/05/06 18:58:52 by cgutierr         ###   ########.fr        #
+#    Updated: 2021/05/06 19:02:34 by cgutierr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,6 +110,8 @@ RUN		rm -rf /var/lib/apt/lists/*
 
 # Copiamos muestro script de entrada
 COPY	./srcs/server.sh ./
+
+COPY	./srcs/index.html ./var/www/html
 
 # Ejecutamos el script de entrada
 CMD		bash server.sh
