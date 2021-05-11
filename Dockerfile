@@ -101,6 +101,9 @@ COPY	./srcs/phpMyAdmin-5.1.0-all-languages /var/www/html/phpmyadmin
 #	Archivo: wp-config.php
 COPY	./srcs/wordpress /var/www/html
 
+# Nuestra página principal
+COPY	./srcs/index.html ./var/www/sopitadequeso
+
 # Asignamos propiedad del directorio al usuario que debe referenciar el actual
 #	usuario del sistema y cambiamos los permisos
 RUN		chown -R $USER:$USER /var/www/ && chmod -R 755 /var/www/
@@ -110,8 +113,6 @@ RUN		rm -rf /var/lib/apt/lists/*
 
 # Copiamos muestro script de entrada
 COPY	./srcs/server.sh ./
-
-COPY	./srcs/index.html ./var/www/html
 
 # Ejecutamos el script de entrada
 CMD		bash server.sh
