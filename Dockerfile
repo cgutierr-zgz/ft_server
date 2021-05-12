@@ -98,7 +98,7 @@ RUN		apt-get install -y --no-install-recommends php-fpm php-mysql
 RUN		apt-get install -y --no-install-recommends mariadb-server
 
 # Nuestra página principal
-COPY	./srcs/index.html ./var/www/html
+#COPY	./srcs/index.html ./var/www/html
 
 # Copiamos nuestro paquete de phpMyAdmin y Wordpress a la ruta especificada
 #	Archivo: config.inc.php
