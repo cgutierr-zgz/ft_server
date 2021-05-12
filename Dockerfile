@@ -30,6 +30,7 @@
 #		-t		=	Nos permite definir un nombre
 # Run:
 #	docker run -it --rm -p 80:80 --name test ft_server:latest
+# -p 443:443
 #		-p		=	Asigna un puerto para poder acceder después
 #		-it		=	Permite acceder a la terminal del contenedor
 #		--rm	=	Eliminará el contenedor después de que este se detenga
@@ -44,13 +45,15 @@ LABEL 	version		=	"1.0"
 # Actualizamos y hacemos upgrade
 RUN		apt-get update && apt-get upgrade -y
 
+# Instalamos VIM
+RUN		apt-get install -y --no-install-recommends vim
+
 # Instalamos NGINX
 RUN		apt-get install -y --no-install-recommends nginx
 
 # Copiamos nuestra configuración de NGINX a la carpeta por defecto de NGINX
 #	Archivo: default
 COPY	./srcs/default /etc/nginx/
-#/sites-available/ ?FIXME:
 
 # Instalamos OpenSSL
 RUN		apt-get install --no-install-recommends openssl
@@ -95,14 +98,15 @@ RUN		apt-get install -y --no-install-recommends php-fpm php-mysql
 # Instalamos MySQL-MariaDB
 RUN		apt-get install -y --no-install-recommends mariadb-server
 
+# Nuestra página principal
+RUN		mkdir ./var/www/sopitadequeso
+COPY	./srcs/index.html ./var/www/sopitadequeso
+
 # Copiamos nuestro paquete de phpMyAdmin y Wordpress a la ruta especificada
 #	Archivo: config.inc.php
-COPY	./srcs/phpMyAdmin-5.1.0-all-languages /var/www/html/phpmyadmin
+COPY	./srcs/phpMyAdmin-5.1.0-all-languages /var/www/sopitadequeso/phpmyadmin
 #	Archivo: wp-config.php
-COPY	./srcs/wordpress /var/www/html
-
-# Nuestra página principal
-COPY	./srcs/index.html ./var/www/sopitadequeso
+COPY	./srcs/wordpress /var/www/sopitadequeso
 
 # Asignamos propiedad del directorio al usuario que debe referenciar el actual
 #	usuario del sistema y cambiamos los permisos
