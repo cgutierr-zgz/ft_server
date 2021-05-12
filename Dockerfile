@@ -29,8 +29,7 @@
 #	docker build -t ft_server:latest ./
 #		-t		=	Nos permite definir un nombre
 # Run:
-#	docker run -it --rm -p 80:80 --name test ft_server:latest
-# -p 443:443
+#	docker run -it --rm -p 80:80 -p 443:443 --name test ft_server:latest
 #		-p		=	Asigna un puerto para poder acceder después
 #		-it		=	Permite acceder a la terminal del contenedor
 #		--rm	=	Eliminará el contenedor después de que este se detenga
