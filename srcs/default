@@ -1,7 +1,7 @@
 server {
 	listen 80;
 	listen [::]:80;
-	server_name sopitadequeso;
+	server_name localhost;
 	
 	return 301 https://$host$request_uri;
 }
@@ -10,14 +10,14 @@ server {
 	
 	listen 443 ssl ;
 	listen [::]:443 ssl ;
-	server_name sopitadequeso;
+	server_name localhost;
 	
 	# Configuramos SSL, su certificado, clave y ubicación
 	ssl on;
 	ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
 	ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
 
-	root /var/www/sopitadequeso;
+	root /var/www/html;
 	index index.html index.htm index.nginx-debian.html index.php;
 
 	location / {

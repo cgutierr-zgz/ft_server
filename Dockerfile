@@ -98,14 +98,13 @@ RUN		apt-get install -y --no-install-recommends php-fpm php-mysql
 RUN		apt-get install -y --no-install-recommends mariadb-server
 
 # Nuestra página principal
-RUN		mkdir ./var/www/sopitadequeso
-COPY	./srcs/index.html ./var/www/sopitadequeso
+COPY	./srcs/index.html ./var/www/html
 
 # Copiamos nuestro paquete de phpMyAdmin y Wordpress a la ruta especificada
 #	Archivo: config.inc.php
-COPY	./srcs/phpMyAdmin-5.1.0-all-languages /var/www/sopitadequeso/phpmyadmin
+COPY	./srcs/phpMyAdmin-5.1.0-all-languages /var/www/html/phpmyadmin
 #	Archivo: wp-config.php
-COPY	./srcs/wordpress /var/www/sopitadequeso
+COPY	./srcs/wordpress /var/www/html
 
 # Asignamos propiedad del directorio al usuario que debe referenciar el actual
 #	usuario del sistema y cambiamos los permisos
