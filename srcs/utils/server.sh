@@ -6,7 +6,8 @@ echo "GRANT ALL PRIVILEGES ON wordpress.* TO 'root'@'localhost' WITH GRANT OPTIO
 echo "update mysql.user set plugin='mysql_native_password' where user='root';" | mysql -u root --skip-password
 echo "FLUSH PRIVILEGES;" | mysql -u root --skip-password
 
-#service php-fpm start
+mysql -u root --skip-password wordpress < wordpress.sql
+
 service php7.3-fpm start
 service nginx start
 #tail -f /dev/null
