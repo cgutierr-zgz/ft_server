@@ -6,7 +6,7 @@
 #    By: cgutierr <cgutierr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/13 18:40:38 by cgutierr          #+#    #+#              #
-#    Updated: 2021/05/17 19:02:08 by cgutierr         ###   ########.fr        #
+#    Updated: 2021/05/17 19:50:36 by cgutierr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,8 @@ RUN		openssl req -x509 -nodes -days 365 \
 # -out:				Indica a OpenSSL dónde colocar el certificado que creamos
 
 # Instalamos PHP
-RUN		apt-get install -y --no-install-recommends php-fpm php-mysql php-xml php-mbstring php-gettext
+RUN		apt-get install -y --no-install-recommends php-fpm php-mysql php-xml \
+		php-mbstring php-gettext
 
 # Instalamos MySQL-MariaDB
 RUN		apt-get install -y --no-install-recommends mariadb-server
@@ -112,12 +113,11 @@ RUN		chmod -R 777 /var/www/html/phpmyadmin/tmp/
 # Borramos la cache de los paquetes
 RUN		rm -rf /var/lib/apt/lists/*
 
-# Copiamos muestro script de entrada y la base de datos .sql
+# Copiamos muestro script de entrada, la base de datos .sql y el autoindex
 COPY	./srcs/utils/server.sh ./
 COPY	./srcs/utils/wordpress.sql ./
-
-#RUN		apt-get install -y --no-install-recommends build-essential
 COPY	./srcs/utils/autoindex.sh ./
+
 # Ejecutamos el script de entrada
 CMD		bash server.sh
 
