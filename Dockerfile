@@ -6,7 +6,7 @@
 #    By: cgutierr <cgutierr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/13 18:40:38 by cgutierr          #+#    #+#              #
-#    Updated: 2021/05/17 18:05:46 by cgutierr         ###   ########.fr        #
+#    Updated: 2021/05/17 19:02:08 by cgutierr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -116,9 +116,8 @@ RUN		rm -rf /var/lib/apt/lists/*
 COPY	./srcs/utils/server.sh ./
 COPY	./srcs/utils/wordpress.sql ./
 
-
 #RUN		apt-get install -y --no-install-recommends build-essential
-COPY	./srcs/utils/autoindex ./
+COPY	./srcs/utils/autoindex.sh ./
 # Ejecutamos el script de entrada
 CMD		bash server.sh
 
