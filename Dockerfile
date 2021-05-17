@@ -6,7 +6,7 @@
 #    By: cgutierr <cgutierr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/13 18:40:38 by cgutierr          #+#    #+#              #
-#    Updated: 2021/05/06 19:02:34 by cgutierr         ###   ########.fr        #
+#    Updated: 2021/05/17 15:33:39 by cgutierr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ RUN		apt-get install -y --no-install-recommends nginx
 
 # Copiamos nuestra configuración de NGINX a la carpeta por defecto de NGINX
 #	Archivo: default
-COPY	./srcs/default /etc/nginx/
+COPY	./srcs/utils/config.conf /etc/nginx/sites-enabled/
 
 # Instalamos OpenSSL
 RUN		apt-get install --no-install-recommends openssl
@@ -92,17 +92,14 @@ RUN		openssl req -x509 -nodes -days 365 \
 # -out:				Indica a OpenSSL dónde colocar el certificado que creamos
 
 # Instalamos PHP
-RUN		apt-get install -y --no-install-recommends php-fpm php-mysql		
+RUN		apt-get install -y --no-install-recommends php-fpm php-mysql php-xml
 
 # Instalamos MySQL-MariaDB
 RUN		apt-get install -y --no-install-recommends mariadb-server
 
-# Nuestra página principal
-#COPY	./srcs/index.html ./var/www/html
-
 # Copiamos nuestro paquete de phpMyAdmin y Wordpress a la ruta especificada
 #	Archivo: config.inc.php
-COPY	./srcs/phpMyAdmin-5.1.0-all-languages /var/www/html/phpmyadmin
+COPY	./srcs/phpMyAdmin-5.1.0 /var/www/html/phpmyadmin
 #	Archivo: wp-config.php
 COPY	./srcs/wordpress /var/www/html
 
@@ -114,7 +111,7 @@ RUN		chown -R $USER:$USER /var/www/ && chmod -R 755 /var/www/
 RUN		rm -rf /var/lib/apt/lists/*
 
 # Copiamos muestro script de entrada
-COPY	./srcs/server.sh ./
+COPY	./srcs/utils/server.sh ./
 
 # Ejecutamos el script de entrada
 CMD		bash server.sh
