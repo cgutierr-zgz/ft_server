@@ -15,7 +15,7 @@
  * This is needed for cookie based authentication to encrypt password in
  * cookie. Needs to be 32 chars long.
  */
-$cfg['blowfish_secret'] = 'sapatitodealelisopitadequeso'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
+$cfg['blowfish_secret'] = 'sapatitodealelisopitadequesosapatitodealelisopitadequesosapatitodealelisopitadequesosapatitodealelisopitadequeso'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
 
 /**
  * Servers configuration
@@ -75,6 +75,8 @@ $cfg['Servers'][$i]['AllowNoPassword'] = true;
  */
 $cfg['UploadDir'] = '';
 $cfg['SaveDir'] = '';
+/* Para que no se queje de =>  El $cfg['TempDir'] (/var/www/html/phpmyadmin/tmp/) es inaccesible. phpMyAdmin es incapaz de almacenar plantillas y será algo lento debido a esto. */
+$cfg['TempDir'] = 'tmp';
 
 /**
  * Whether to display icons or text or both icons and text in table row

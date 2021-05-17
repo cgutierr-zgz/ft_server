@@ -1,0 +1,2 @@
+Este directorio ha sido creado para que no se queje de que no tiene la capacidad
+de almacenar platillas en /tmp

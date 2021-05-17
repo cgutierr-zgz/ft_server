@@ -6,7 +6,7 @@
 #    By: cgutierr <cgutierr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/13 18:40:38 by cgutierr          #+#    #+#              #
-#    Updated: 2021/05/17 15:33:39 by cgutierr         ###   ########.fr        #
+#    Updated: 2021/05/17 15:53:37 by cgutierr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,7 @@ RUN		openssl req -x509 -nodes -days 365 \
 # -out:				Indica a OpenSSL dónde colocar el certificado que creamos
 
 # Instalamos PHP
-RUN		apt-get install -y --no-install-recommends php-fpm php-mysql php-xml
+RUN		apt-get install -y --no-install-recommends php-fpm php-mysql php-xml php-mbstring php-gettext
 
 # Instalamos MySQL-MariaDB
 RUN		apt-get install -y --no-install-recommends mariadb-server
@@ -106,6 +106,7 @@ COPY	./srcs/wordpress /var/www/html
 # Asignamos propiedad del directorio al usuario que debe referenciar el actual
 #	usuario del sistema y cambiamos los permisos
 RUN		chown -R $USER:$USER /var/www/ && chmod -R 755 /var/www/
+RUN		chmod -R 777 /var/www/html/phpmyadmin/tmp/
 		
 # Borramos la cache de los paquetes
 RUN		rm -rf /var/lib/apt/lists/*
