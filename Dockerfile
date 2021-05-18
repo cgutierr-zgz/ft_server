@@ -6,10 +6,13 @@
 #    By: cgutierr <cgutierr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/13 18:40:38 by cgutierr          #+#    #+#              #
-#    Updated: 2021/05/17 19:50:36 by cgutierr         ###   ########.fr        #
+#    Updated: 2021/05/18 15:48:35 by cgutierr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+################################################################################
+#                              REQUERIMIENTOS                                  #
+################################################################################
 # Instalar un servidor web con Nginx dentro de un solo contenedor Docker
 # Tendrá que funcionar sobre Debian Buster
 # Servicios:
@@ -24,13 +27,21 @@
 # Debe redirigir al sitio correcto en función de la URL introducida
 #
 # Debe funcionar con un índice automático, que se puede desactivar
-
+################################################################################
+#                                   USAGE                                      #
+################################################################################
 # Build:
 #	docker build -t ft_server:latest ./
 #		-t		=	Nos permite definir un nombre
 # Run:
-#	docker run -it --rm -p 80:80 -p 443:443 --name test ft_server:latest
-#	docker run -it -p 80:80 -p 443:443 --name test ft_server:latest
+# Creamos el contenedor, entrando en el bash, seteando ENV y borrádolo al finalizar
+#	docker run -it --rm -p 80:80 -p 443:443 --env "AUTOINDEX"="OFF" --name test ft_server:latest
+#
+# Creamos el contenedor, entrando en el bash, seteando ENV y borrádolo al finalizar
+#	docker run -it -p 80:80 -p 443:443 --env "AUTOINDEX"="OFF" --name test ft_server:latest
+#
+# Entrar en el bash del contenedor ya iniciado:
+#	docker exec -it test bash
 #		-p		=	Asigna un puerto para poder acceder después
 #		-it		=	Permite acceder a la terminal del contenedor
 #		--rm	=	Eliminará el contenedor después de que este se detenga
@@ -62,9 +73,9 @@ RUN		apt-get install --no-install-recommends openssl
 #	archivo de configuración de NGINX
 #	Archivo: config_on.conf
 RUN		openssl req -x509 -nodes -days 365 \
-		-subj "/C=ES/ST=Madird/L=Madrid/O=42/OU=42Madrid/CN=cgutierr" \
-		-newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key \
-		-out /etc/ssl/certs/nginx-selfsigned.crt
+	-subj "/C=ES/ST=Madird/L=Madrid/O=42/OU=42Madrid/CN=cgutierr" \
+	-newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key \
+	-out /etc/ssl/certs/nginx-selfsigned.crt
 # openssl:			Es la herramienta de línea de comandos básica para crear y
 #	administrar certificados, claves, y otros archivos de OpenSSL.
 # req:				Este subcomando especifica que deseamos usar la
@@ -94,7 +105,7 @@ RUN		openssl req -x509 -nodes -days 365 \
 
 # Instalamos PHP
 RUN		apt-get install -y --no-install-recommends php-fpm php-mysql php-xml \
-		php-mbstring php-gettext
+	php-mbstring php-gettext
 
 # Instalamos MySQL-MariaDB
 RUN		apt-get install -y --no-install-recommends mariadb-server
@@ -109,7 +120,7 @@ COPY	./srcs/wordpress /var/www/html/wordpress
 #	usuario del sistema y cambiamos los permisos
 RUN		chown -R $USER:$USER /var/www/ && chmod -R 755 /var/www/
 RUN		chmod -R 777 /var/www/html/phpmyadmin/tmp/
-		
+
 # Borramos la cache de los paquetes
 RUN		rm -rf /var/lib/apt/lists/*
 
@@ -121,8 +132,8 @@ COPY	./srcs/utils/autoindex.sh ./
 # Ejecutamos el script de entrada
 CMD		bash server.sh
 
-# Exponemos el puerto 80 de nuestra imagen contenedor
+# Exponemos el puerto 80 y 442 de nuestra imagen contenedor
 EXPOSE	80
 
-# Exponemos el puerto 443 para el SSL
-EXPOSE	443
+# Seteamos por defecto a ON el autoindex
+ENV		"AUTOINDEX"="ON"
