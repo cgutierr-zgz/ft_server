@@ -6,7 +6,7 @@
 #    By: cgutierr <cgutierr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/13 18:40:38 by cgutierr          #+#    #+#              #
-#    Updated: 2021/05/18 15:48:35 by cgutierr         ###   ########.fr        #
+#    Updated: 2021/05/18 16:01:39 by cgutierr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,9 +36,11 @@
 # Run:
 # Creamos el contenedor, entrando en el bash, seteando ENV y borrádolo al finalizar
 #	docker run -it --rm -p 80:80 -p 443:443 --env "AUTOINDEX"="OFF" --name test ft_server:latest
+#	docker run -it --rm -p 80:80 -p 443:443 --name test ft_server:latest
 #
 # Creamos el contenedor, entrando en el bash, seteando ENV y borrádolo al finalizar
 #	docker run -it -p 80:80 -p 443:443 --env "AUTOINDEX"="OFF" --name test ft_server:latest
+#	docker run -it -p 80:80 -p 443:443 --name test ft_server:latest
 #
 # Entrar en el bash del contenedor ya iniciado:
 #	docker exec -it test bash

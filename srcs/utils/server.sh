@@ -1,5 +1,4 @@
 #!/bin/bash
-mv /var/www/html/index.nginx-debian.html /var/www/html/wordpress/tmp/index.nginx-debian.off
 service mysql start
 
 echo "CREATE DATABASE wordpress;" | mysql -u root --skip-password
@@ -12,6 +11,7 @@ mysql -u root --skip-password wordpress < wordpress.sql
 service php7.3-fpm start
 
 service nginx start
+
 
 if [[ "$AUTOINDEX" == "ON" ]]
 then
